@@ -1,0 +1,81 @@
+
+/* Site-wide base styling */
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: black url('/stars.jpg');
+	background-attachment: fixed;
+	
+	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+	text-decoration: none;
+	color: #BBB;
+}
+.clear {
+	clear: both;
+}
+
+/* Generic link styles */
+
+a        { text-decoration:none; color: #55f; cursor: pointer; }
+a:hover  { color: #88f; }
+a:active { color: #88f; }
+a img    { border: 0; }
+
+/* Header and generic content container */
+
+#header {
+	width: 100%;
+	height: 55px;
+	background: url('/titlebar.png');
+	padding: 0;
+	overflow: hidden;
+}
+.leftitem {
+	float: left;
+}
+.rightitem {
+	float: right;
+}
+#content {
+	clear: both;
+}
+
+/* Project panels index page */
+
+#panels a {
+	float: left;
+	text-align: center;
+}
+
+#panels .thumb img {
+	-webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+	box-shadow: 0 0 15px 0px #EA0;
+	margin: 15px;
+	border-radius: 15px;
+}
+
+#panels a:hover .thumb img { 
+	box-shadow: 0 0 18px 2px #FB1;
+}
+		
+#panels .title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#skater {
+	clear: both;
+	padding-top: 100px;
+	text-align: center;
+}
+
+
+
+span.projectPlatform { color: #07B; }
+span.projectDone     { color: #2A2; }
+span.projectActive   { color: #990; }
+span.projectConcept  { color: #A22; }
