@@ -1,4 +1,3 @@
-jaBurnsNet
-==========
+### [jaBurnsNet](http://jaburns.net/)
 
-Source for my web site.
+Basic HTML template engine and static file server which I use for my website.
