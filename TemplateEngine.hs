@@ -4,11 +4,12 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Templates (
+module TemplateEngine (
 
     loadView,
     insertContent,
-    renderView
+    renderView,
+    insertValues
     
 ) where
 
@@ -106,6 +107,27 @@ insertContent id contents doc =
     matchIdAttr attrs = case lookup "id" attrs of
         Just x -> if x == T.pack id then True else False
         Nothing -> False
+
+        
+multiReplace :: [(String,String)] -> T.Text -> T.Text
+multiReplace dict = foldr (.) id $ map (\(x,y) -> T.replace (T.pack x) (T.pack y)) dict
+
+
+-- Given a list of string values indexed by their IDs, this function will
+-- insert them in to the document's text nodes and attribute values where ${id} 
+-- is found.
+insertValues :: [(String,String)] -> Document -> Document
+insertValues vals doc =
+    doc { docContent = map doNode (docContent doc) }
+  where
+    doNode node =
+        case node of
+            Element t a c -> Element t (doAttrs a) (map doNode c)
+            TextNode t -> TextNode (doText t)
+            otherwise -> node
+    doAttrs = map (\(x,y) -> (x, doText y))
+    doText = multiReplace vals'
+    vals' = map (\(x,y) -> ("${"++x++"}", y)) vals
 
 
 -- This function loads a view file from disk and recursively applies all
