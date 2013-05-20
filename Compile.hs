@@ -7,7 +7,7 @@ module Main (main) where
 -------------------------------------------------------------------------------
 
 import Text.XmlHtml
-import Templates
+import TemplateEngine
 import System.Directory (createDirectoryIfMissing)
 
 -------------------------------------------------------------------------------
