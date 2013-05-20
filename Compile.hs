@@ -13,7 +13,9 @@ import Templates
 
 main = do
     doc <- loadView "index.view.html"
-    putStrLn $ renderView $ doc
+    panel <- loadView "indexpanel.partial.html"
+    let docWithPanel = insertContent "panels" (docContent panel) doc
+    writeFile "compiled/index.html" $ renderView $ docWithPanel
     
     
     

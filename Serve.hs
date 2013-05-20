@@ -18,7 +18,7 @@ import           System.Directory (doesFileExist)
 -------------------------------------------------------------------------------
  
 main = do
-    let port = 9000
+    let port = 80
     putStrLn $ "Listening on port " ++ show port
     run port app
 

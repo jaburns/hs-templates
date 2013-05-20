@@ -1,44 +1,7 @@
 
-<a href="/${name}/"> 
+<a> 
     <div class="thumb">
-        <img src="/projects/${name}/thumb.png" />
+        <img src="/projects/${name}.png" />
     </div>
     <div class="title">${name}</div>
-    <div class="description">${name}</div>
 </a>
-
-
-
-bakeView :: View -> [(String, BakedView)] -> [Variable] -> BakedView
-bakeView view subViews variables = BakedView
---????????????????????
-
-
-concatViews :: [BakedView] -> BakedView
-concatViews = 
---????????????????????
-
-
-type Variable = (String,String)
-
-
-panelVariables :: [[Variable]]
-panelVariables = [
-  [ ("name", "platformer"),
-    ("desc", "lol")],
-  [ ("name", "elastobal"),
-    ("desc", "something")] ]
-
-
-bakedIndexView :: BakedView
-bakedIndexView =
-    bakeView indexView [("panels", panels)] []
-  where
-  
-    indexView = loadViewFromDisk "/templates/index.view.html"
-    panelView = loadViewFromDisk "/templates/indexpanel.partial.html"
-    
-    panels = concatViews $ map (bakeView panel []) panelVariables
-    
-    
-    

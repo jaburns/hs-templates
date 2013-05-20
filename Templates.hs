@@ -63,12 +63,34 @@ contentBlocks (HtmlDocument _ _ content) = mapMaybe checkNode content
             then fmap (\id -> (id,children)) (lookup "id" attrs)
             else Nothing
         otherwise -> Nothing
+        
+        
+-- Removes extra whitespace and comment nodes from a document.
+stripWhitespace :: Document -> Document
+stripWhitespace doc =
+    doc { docContent = mapMaybe nodeWithoutWS (docContent doc) }
+  where
+    nodeWithoutWS node =
+        case node of 
+            TextNode t -> if T.length (T.strip t) > 0
+                        then Just (TextNode (T.strip t)) else Nothing
+            Comment _ -> Nothing
+            Element a b children ->
+                Just $ Element a b $ mapMaybe nodeWithoutWS children
+        
+        
+-- Given a list of named content blocks, this function will insert them
+-- in to the supplied template document.
+insertAllContents :: [(T.Text,[Node])] -> Document -> Document
+insertAllContents ((a,b):rest) doc =
+    insertAllContents rest $ insertContent (T.unpack a) b doc
+insertAllContents [] doc = doc
 
         
 -- Given the id of a content block and its content nodes, this function
 -- will insert the block in to the document if an appropriate <insert-content>
 -- tag exists.
-insertContent :: T.Text -> [Node] -> Document -> Document
+insertContent :: String -> [Node] -> Document -> Document
 insertContent id contents doc =
     doc { docContent = newChildren (docContent doc) }
   where
@@ -82,16 +104,8 @@ insertContent id contents doc =
             otherwise -> [node]
     
     matchIdAttr attrs = case lookup "id" attrs of
-        Just x -> if x == id then True else False
+        Just x -> if x == T.pack id then True else False
         Nothing -> False
-
-
--- Given a list of named content blocks, this function will insert them
--- in to the supplied template document.
-insertAllContents :: [(T.Text,[Node])] -> Document -> Document
-insertAllContents ((a,b):rest) doc =
-    insertAllContents rest $ insertContent a b doc
-insertAllContents [] doc = doc
 
 
 -- This function loads a view file from disk and recursively applies all
@@ -111,5 +125,5 @@ loadView path = do
     
 
 -- Renders an HTML document to a Haskell string.
-renderView = BS.unpack . toByteString . render
+renderView = BS.unpack . toByteString . render . stripWhitespace
 
