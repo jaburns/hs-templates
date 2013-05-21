@@ -16,6 +16,7 @@ import System.Directory (createDirectoryIfMissing)
 things = map (\x -> [("name",x)]) 
   [ "platformer",
     "elastoball",
+    "galaxyrider",
     "skistuntstudio",
     "nescorder",
     "avrcaster",
