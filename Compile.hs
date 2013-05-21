@@ -13,7 +13,8 @@ import System.Directory (createDirectoryIfMissing)
 -------------------------------------------------------------------------------
 
 
-things = map (\x -> [("name",x)]) [
+things = map (\x -> [("name",x)]) 
+  [ "platformer",
     "elastoball",
     "skistuntstudio",
     "nescorder",
