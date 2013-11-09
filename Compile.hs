@@ -35,7 +35,13 @@ things = map (\x -> [("name",x)])
 main = do
     createDirectoryIfMissing True "compiled"
     makeIndex
+    makeWreck
     putStrLn "Done!"
+
+makeWreck = do
+    putStrLn "Compiling \"wreck.html\"..."
+    doc <- loadView "wreck.view.html"
+    writeFile "compiled/wreck.html" $ renderView $ doc
 
 makeIndex = do
     putStrLn "Compiling \"index.html\"..."

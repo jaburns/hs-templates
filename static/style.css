@@ -6,7 +6,7 @@ html, body {
 	padding: 0;
 	background: black url('/stars.jpg');
 	background-attachment: fixed;
-	
+
 	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 	text-decoration: none;
@@ -58,10 +58,10 @@ a img    { border: 0; }
 	border-radius: 15px;
 }
 
-#panels a:hover .thumb img { 
+#panels a:hover .thumb img {
 	box-shadow: 0 0 18px 2px #FB1;
 }
-		
+
 #panels .title {
 	font-size: 20px;
 	font-weight: bold;
@@ -73,9 +73,25 @@ a img    { border: 0; }
 	text-align: center;
 }
 
-
-
 span.projectPlatform { color: #07B; }
 span.projectDone     { color: #2A2; }
 span.projectActive   { color: #990; }
 span.projectConcept  { color: #A22; }
+
+/* Nervous Wreck album download page */
+
+.wreck-container {
+    position:    absolute;
+    top:         50%;
+    left:        50%;
+    width:       443px;
+    height:      443px;
+    text-align:  center;
+    margin-top:  -221px;
+    margin-left: -221px;
+}
+.wreck-container img {
+    border:  0;
+    margin:  0;
+    padding: 0;
+}

@@ -7,7 +7,7 @@
 module Main (main) where
 
 -------------------------------------------------------------------------------
- 
+
 import           Network.Wai
 import           Network.Wai.Handler.Warp
 import           Network.HTTP.Types (status200)
@@ -16,15 +16,16 @@ import           Control.Monad.IO.Class (liftIO)
 import           System.Directory (doesFileExist)
 
 -------------------------------------------------------------------------------
- 
+
 main = do
     let port = 80
     putStrLn $ "Listening on port " ++ show port
     run port app
 
-app req = 
+app req =
     case pathInfo req of
         [] -> serveFile "compiled/index.html"
+        ["wreck"] -> serveFile "compiled/wreck.html"
         path -> serveFile $ "static/" `T.append` (T.intercalate "/" path)
 
 -- Attempts to retrieve and serve a file from the "static" folder, responds
