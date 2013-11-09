@@ -13,7 +13,7 @@ import System.Directory (createDirectoryIfMissing)
 -------------------------------------------------------------------------------
 
 
-things = map (\x -> [("name",x)]) 
+things = map (\x -> [("name",x)])
   [ "platformer",
     "elastoball",
     "galaxyrider",
@@ -34,12 +34,17 @@ things = map (\x -> [("name",x)])
 
 main = do
     createDirectoryIfMissing True "compiled"
+    makeIndex
+    putStrLn "Done!"
+
+makeIndex = do
+    putStrLn "Compiling \"index.html\"..."
     doc <- loadView "index.view.html"
     panel <- loadView "indexpanel.partial.html"
     let panelSet = map (\x -> insertValues x panel) things
     let panels = concat $ map docContent panelSet
     let docWithPanels = insertContent "panels" panels doc
     writeFile "compiled/index.html" $ renderView $ docWithPanels
-    
-    
-    
+
+
+
